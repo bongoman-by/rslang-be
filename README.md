@@ -22,5 +22,5 @@ JWT_REFRESH_SECRET_KEY=<ваш секретный ключ для подписи
 4. ```npm run start:dev```
 
 ## Загрузка слов в базу mongo и файлов на сервис cloudinary (только для локального приложения)
-1. http://localhost:<PORT>/seed (get)
-2. http://localhost:<PORT>/upload (post)
+1. http://localhost:```<порт на котором будет запущено приложение>```/seed (get)
+2. http://localhost:```<порт на котором будет запущено приложение>```/upload (post)
