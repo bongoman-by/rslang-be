@@ -2,6 +2,7 @@ const uploadRepo = require('./upload.db.repository');
 const cloudinary = require('cloudinary').v2;
 const path = require('path');
 const fetch = require('node-fetch');
+const { FILE_STORAGE_PATH } = require('../../common/config');
 
 const { BAD_REQUEST_ERROR } = require('../../errors/appErrors');
 
@@ -31,8 +32,6 @@ const upload = (fullFileName, type) => {
 };
 
 const post = async () => {
-  const baseURL =
-    'https://res.cloudinary.com/s-klyuchnikov/image/upload/v1670136773/rslang/';
   const idList = [];
   const props = [
     { prop: 'image', type: 'image' },
@@ -46,7 +45,7 @@ const post = async () => {
       const words = await uploadRepo.post({ group, page });
       words.forEach(word => {
         props.forEach(item => {
-          const url = `${baseURL}${word[item.prop]}`;
+          const url = `${FILE_STORAGE_PATH}${word[item.prop]}`;
           fetch(url)
             .then()
             .catch(() => {
@@ -70,8 +69,6 @@ const post = async () => {
 //! Request not working properly
 
 const get = async () => {
-  const baseURL =
-    'https://res.cloudinary.com/s-klyuchnikov/image/upload/v1670136773/rslang/';
   const props = [
     { prop: 'image', type: 'image' },
     { prop: 'audio', type: 'video' },
@@ -83,7 +80,7 @@ const get = async () => {
       const words = await uploadRepo.post({ group, page });
       words.forEach(word => {
         props.forEach(item => {
-          const url = `${baseURL}${word[item.prop]}`;
+          const url = `${FILE_STORAGE_PATH}${word[item.prop]}`;
           fetch(url)
             .then()
             .catch(() => {
