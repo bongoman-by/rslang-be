@@ -8,7 +8,8 @@ router.route('/').post(async (req, res) => {
 
   res.status(OK).json({
     message: 'Authenticated',
-    ...auth
+    ...auth,
+    user: auth.user.toResponse()
   });
 });
 

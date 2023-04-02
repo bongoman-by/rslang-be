@@ -9,6 +9,7 @@ const ALLOWED_PATHS = ['/signin', '/signup', '/seed', '/upload'];
 const DOC_PATH_REGEX = /^\/doc\/?$/;
 const DOC_PATH_RESOURCES_REGEX = /^\/doc\/.+$/;
 const WORDS_PATH_REGEX = /^\/words.*$/;
+const SEARCH_PATH_REGEX = /^\/search.*$/;
 const USERS_PATH = '/users';
 
 function isOpenPath(path) {
@@ -16,7 +17,8 @@ function isOpenPath(path) {
     ALLOWED_PATHS.includes(path) ||
     DOC_PATH_REGEX.test(path) ||
     DOC_PATH_RESOURCES_REGEX.test(path) ||
-    WORDS_PATH_REGEX.test(path)
+    WORDS_PATH_REGEX.test(path) ||
+    SEARCH_PATH_REGEX.test(path)
   );
 }
 
@@ -24,16 +26,13 @@ const checkAuthentication = (req, res, next) => {
   if (isOpenPath(req.path)) {
     return next();
   }
-
   if (req.path === USERS_PATH && req.method === 'POST') {
     return next();
   }
-
   const rawToken = req.headers.authorization;
   if (!rawToken) {
     throw new AUTHORIZATION_ERROR();
   }
-
   try {
     const token = rawToken.slice(7, rawToken.length);
     const secret = req.path.includes('tokens')
@@ -45,7 +44,6 @@ const checkAuthentication = (req, res, next) => {
   } catch (error) {
     throw new AUTHORIZATION_ERROR();
   }
-
   next();
 };
 

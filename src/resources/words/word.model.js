@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const { addMethods } = require('../../utils/toResponse');
+const { addMethodsWord } = require('../../utils/toResponse');
 
 const WordsSchema = new Schema(
   {
@@ -21,6 +21,13 @@ const WordsSchema = new Schema(
   { collection: 'words' }
 );
 
-addMethods(WordsSchema);
+WordsSchema.index({
+  word: 'text',
+  textMeaning: 'text',
+  textExample: 'text',
+  transcription: 'text'
+});
+
+addMethodsWord(WordsSchema);
 
 module.exports = mongoose.model('Words', WordsSchema);

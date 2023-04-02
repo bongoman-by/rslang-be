@@ -8,7 +8,6 @@ const getUserByEmail = async email => {
   if (!user) {
     throw new NOT_FOUND_ERROR(ENTITY_NAME, { email });
   }
-
   return user;
 };
 
@@ -17,7 +16,6 @@ const get = async id => {
   if (!user) {
     throw new NOT_FOUND_ERROR(ENTITY_NAME, { id });
   }
-
   return user;
 };
 

@@ -41,7 +41,6 @@ const post = async () => {
   ];
   for (let group = 0; group < 6; group++) {
     for (let page = 0; page < 30; page++) {
-      console.log({ group, page });
       const words = await uploadRepo.post({ group, page });
       words.forEach(word => {
         props.forEach(item => {

@@ -6,6 +6,7 @@ const { validator } = require('../../utils/validation/validator');
 const aggregatedWordsService = require('./aggregatedWord.service');
 const { BAD_REQUEST_ERROR } = require('../../errors/appErrors');
 const extractQueryParam = require('../../utils/getQueryNumberParameter');
+const prepareWord = require('../../utils/prepareWord');
 
 router.get('/', async (req, res) => {
   const perPage = extractQueryParam(req.query.wordsPerPage, 10);
@@ -27,6 +28,11 @@ router.get('/', async (req, res) => {
     perPage,
     filter
   );
+
+  words[0].paginatedResults = words[0].paginatedResults.map(word => {
+    const { _id, ...rest } = word;
+    return prepareWord(_id, rest);
+  });
   res.status(OK).send(words);
 });
 

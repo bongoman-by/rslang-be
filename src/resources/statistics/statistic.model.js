@@ -4,10 +4,11 @@ const { addMethods } = require('../../utils/toResponse');
 
 const StatisticSchema = new Schema(
   {
-    userId: {
-      type: String,
-      required: true
-    },
+    // userId: {
+    //   type: String,
+    //   required: true
+    // },
+    userId: { type: mongoose.Schema.Types.ObjectID, required: true },
     learnedWords: {
       type: Number
     },
@@ -18,6 +19,8 @@ const StatisticSchema = new Schema(
   },
   { collection: 'statistic' }
 );
+
+StatisticSchema.index({ userId: 1 });
 
 addMethods(StatisticSchema);
 

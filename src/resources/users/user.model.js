@@ -16,7 +16,17 @@ const User = new Schema(
       required: true,
       trim: true,
       minlength: 8
-    }
+    },
+    role: {
+      type: String,
+      enum: {
+        values: ['admin', 'user'],
+        message: '{VALUE} is not valid role'
+      },
+      default: 'user',
+      required: true
+    },
+    avatar: String
   },
   { collection: 'users' }
 );

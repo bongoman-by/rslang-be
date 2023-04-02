@@ -13,8 +13,11 @@ const { NOT_FOUND } = require('http-status-codes');
 const winston = require('./common/logging');
 const wordRouter = require('./resources/words/word.router');
 const seedRouter = require('./resources/seed/seed.router');
+const searchRouter = require('./resources/search/search.router');
 const uploadRouter = require('./resources/upload/upload.router');
+const imagesRouter = require('./resources/images/images.router');
 const signinRouter = require('./resources/authentication/signin.router');
+const signupRouter = require('./resources/authentication/signup.router');
 const userRouter = require('./resources/users/user.router');
 const userTokenRouter = require('./resources/token/token.router');
 const userWordsRouter = require('./resources/userWords/userWord.router');
@@ -59,11 +62,17 @@ app.use('/words', wordRouter);
 
 app.use('/seed', seedRouter);
 
+app.use('/search', searchRouter);
+
 app.use('/upload', uploadRouter);
 
 app.use('/signin', signinRouter);
 
+app.use('/signup', signupRouter);
+
 app.use('/users', userRouter);
+
+app.use('/images', imagesRouter);
 
 userRouter.use('/:id/tokens', userIdValidator, userTokenRouter);
 
