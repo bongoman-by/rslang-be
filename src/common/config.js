@@ -20,5 +20,6 @@ module.exports = {
   JWT_REFRESH_EXPIRE_TIME: 4.5 * 60 * 60,
   FILE_STORAGE_PATH_IMAGE: process.env.FILE_STORAGE_PATH_IMAGE || '',
   FILE_STORAGE_PATH_AUDIO: process.env.FILE_STORAGE_PATH_AUDIO || '',
-  FILE_STORAGE_PATH: process.env.FILE_STORAGE_PATH || ''
+  FILE_STORAGE_PATH:
+    process.env.FILE_STORAGE_PATH || 'https://rslang-words-be.herokuapp.com/'
 };
